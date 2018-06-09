@@ -1,0 +1,61 @@
+<div class="containerTitle">
+    <img src="/img/hamburger.png">
+    <h1>EAT - DA - BURGER!</h1>
+</div>
+<div class="container notDevoured">
+    <div class="containerTitle">
+        <h2>Burgers that are not devoured!</h2>
+    </div>
+    <ul class="burgerContainer">
+        {{#each burgers}} {{#unless this.devoured}}
+        <ul>
+            <div class="burgerName sameLine">
+                <span>{{this.id}}.&nbsp;</span>
+                {{this.burger_name}}
+            </div>
+
+            <form class="sameLine" action="burgers/update/{{this.id}}?_method=PUT" method="POST">
+                <input type="hidden" name="devoured" value="true">
+                <button type="submit">DEVOUR!</button>
+            </form>
+
+        </ul>
+        {{/unless}} {{/each}}
+    </ul>
+</div>
+
+<div class="container enterForm">
+    <div class="containerTitle">
+        <h2>Add a Burger</h2>
+    </div>
+    <form class="create-update-form" action="burgers/create" method="POST">
+
+        <div class="form-group">
+            <input type="text" id="bu" name="burger_name">
+        </div>
+
+        <button id="add" type="submit">ADD NOW</button>
+    </form>
+</div>
+
+<div class="container devoured">
+    <div class="containerTitle">
+        <h2>Burgers that have been devoured!</h2>
+    </div>
+    <ul class="burgerContainer">
+        {{#each burgers}} {{#if this.devoured}}
+        <ul>
+            <div class="burgerName sameLine">
+                <span>{{this.id}}.&nbsp;</span>
+                {{this.burger_name}}
+            </div>
+
+            <form class="sameLine" action="burgers/update/{{this.id}}?_method=PUT" method="POST">
+                <input type="hidden" name="devoured" value="false">
+                <button type="submit">RESTOCK!</button>
+            </form>
+
+        </ul>
+        {{/if}} {{/each}}
+    </ul>
+</div>
